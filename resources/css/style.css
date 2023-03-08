@@ -3,6 +3,10 @@
     margin: 0;
     padding: 0;
 }
+
+a{
+    text-decoration: none;
+}
 h1{
     padding: 10px;
     font-size: 1.2rem;
@@ -12,7 +16,7 @@ h1{
 /* container grid */
 .container{
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 5fr;
 }
 
 header{
@@ -63,18 +67,41 @@ header{
 
 .table-list table{
     width: 100%;
-}
-
-.table-list td{
-    padding: 1rem;
+    border-collapse: collapse;
 }
 
 .table-list thead td{
     font-weight: bold;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
 }
 
+.table-list td{
+    padding: 1rem;
+    border-right: 1px solid rgb(173, 173, 173);
+    border-bottom: 1px solid rgb(173, 173, 173);
+}
+
+
 .button{
+    min-height: 25px;
+    min-width: 25px;
     border-radius: 10px;
     padding: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #495663;
+    color: white;
+}
+.button-td{
+    width: 15px;
+}
+
+
+.add{
+    background-color:rgb(76, 142, 185);
+}
+.delete{
+    background-color:rgb(185, 48, 48);
 }
