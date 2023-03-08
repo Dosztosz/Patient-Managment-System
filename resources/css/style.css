@@ -1,12 +1,13 @@
-/* main Declarations */
+/* main statements */
 *{
     margin: 0;
     padding: 0;
 }
-
+/* a global statement */
 a{
     text-decoration: none;
 }
+/* h1 global statement */
 h1{
     padding: 10px;
     font-size: 1.2rem;
@@ -18,17 +19,20 @@ h1{
     display: grid;
     grid-template-columns: 1fr 5fr;
 }
-
+/* Header Layout */
 header{
     padding: 1rem;
     display: flex;
     justify-content: space-between;
 }
+
+
 .edit-bar{
     padding: 0.5rem;
     background-color: #f3f9ff;
     display: flex;
     justify-content: right;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -82,7 +86,7 @@ header{
     border-bottom: 1px solid rgb(173, 173, 173);
 }
 
-
+/* Style Button */
 .button{
     min-height: 25px;
     min-width: 25px;
@@ -94,6 +98,7 @@ header{
     background-color: #495663;
     color: white;
 }
+
 .button-td{
     width: 15px;
 }
@@ -105,3 +110,53 @@ header{
 .delete{
     background-color:rgb(185, 48, 48);
 }
+
+.form{
+    margin: auto; 
+    display: block; 
+    width: 50vw;  
+    margin-top: 5rem;
+}
+
+.form form{
+    display: block;
+}
+
+ /* Style inputs */
+  input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+ /* Style inputs */
+ input[type=date], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+/* Style the submit button */
+input[type=submit] {
+  width: 100%;
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Add a background color to the submit button on mouse-over */
+input[type=submit]:hover {
+  background-color: #45a049;
+} 
