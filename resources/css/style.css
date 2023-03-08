@@ -1,0 +1,80 @@
+/* main Declarations */
+*{
+    margin: 0;
+    padding: 0;
+}
+h1{
+    padding: 10px;
+    font-size: 1.2rem;
+    color: white;
+}
+
+/* container grid */
+.container{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+header{
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.edit-bar{
+    padding: 0.5rem;
+    background-color: #f3f9ff;
+    display: flex;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.main-menu{
+    background-color: #2d353d;
+    height: 100vh;
+}
+
+.logo{
+    margin-bottom: 2rem;
+}
+
+.main-menu nav ul{
+    list-style-type: none;
+}
+.main-menu nav li{
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+    transition: 0.3s;
+    color: white;
+}
+.main-menu nav li a{
+    display: block;
+    color: white;
+    text-decoration: none;
+}
+.main-menu nav li:hover{
+    background-color: #495663;
+    cursor: pointer;
+}
+
+.main-menu nav li.active{
+    background-color: #192027;
+}
+
+.table-list table{
+    width: 100%;
+}
+
+.table-list td{
+    padding: 1rem;
+}
+
+.table-list thead td{
+    font-weight: bold;
+}
+
+.button{
+    border-radius: 10px;
+    padding: 0.5rem;
+    background-color: #495663;
+}
