@@ -1,20 +1,18 @@
 <?php 
-$sql = "SELECT * FROM `patients`";
+$sql = "SELECT * FROM `groups` AND 'patients'";
 $result = $connect->query($sql);
 $site_title = "Patient manager"
 ?>
 
 <div class="edit-bar">
-    <a href=""><div class="button add">+</div></a>Dodaj nowego pacjenta
+    <a href=""><div class="button add">+</div></a>Add new Group
 </div>
-<h2>Patient List</h2>
+<h2>Group List</h2>
 <div class="table-list">
     <table>
         <thead>
             <td>Name</td>
-            <td>Vorname</td>
-            <td>Birth date</td>
-            <td>User Group</td>
+            <td>List of Patients</td>
             <td>Edit</td>
             <td>Delete</td>
         </thead>
@@ -23,8 +21,8 @@ $site_title = "Patient manager"
             // output data from table Patietns
             while($row = $result->fetch_assoc()) {
               echo '<tr>
-              <td>'.$row['firstname'].'</td>
-              <td>'.$row['lastname'].'</td>
+              <td>'.$row['name'].'</td>
+              <td>'.$row['patient_list'].'</td>
               <td>'.$row['birthday'].'</td>
               <td>'.$row['group_list'].'</td>
               <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["id"].'"">+</a></td>

@@ -1,7 +1,21 @@
 <?php 
 $sql = "SELECT * FROM `patients`";
 $result = $connect->query($sql);
-$site_title = "Patient manager"
+
+if(isset($_POST['submit']))
+{    
+     $firstname = $_POST['firstname'];
+     $lastname = $_POST['lastname'];
+     //SQL statement
+     $sql = "INSERT INTO patients (name,email,mobile) VALUES ('$name','$email','$mobile')";
+     //Adding informations to database
+     if (mysqli_query($conn, $sql)) {
+        echo "New record has been added successfully !";
+     } else {
+        echo "Error: " . $sql . ":-" . mysqli_error($conn);
+     }
+     mysqli_close($conn);
+}
 ?>
 
 <div class="edit-bar">
