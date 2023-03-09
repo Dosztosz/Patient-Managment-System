@@ -1,6 +1,6 @@
 <?php 
 $user ="Tomek";
-
+require "resources/configuration/connect.php"
 ?>
 <!DOCTYPE html>
 <html lang="en">

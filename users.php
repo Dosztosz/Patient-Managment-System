@@ -1,5 +1,13 @@
 <?php 
 $user ="Tomek";
+//Connecting to database
+require "resources/configuration/connect.php";
+$sql = "SELECT * FROM `patients`";
+
+$result = $connect->query($sql);
+
+
+
 
 ?>
 <!DOCTYPE html>
@@ -13,8 +21,10 @@ $user ="Tomek";
 </head>
 <body>
 <div class="container">
+        <!-- Import Main Menu -->
         <?php require "resources/templates/main-menu.php" ?>
         <div class="content">
+            <!-- Import Header -->
             <?php require "resources/templates/header.php" ?>
             <div class="edit-bar">
                 <a href=""><div class="button add">+</div></a>Dodaj nowego pacjenta
@@ -29,6 +39,26 @@ $user ="Tomek";
                         <td>Edit</td>
                         <td>Delete</td>
                     </thead>
+                    <?php
+                    if ($result -> num_rows > 0) {
+                        // output data from table Patietns
+                        while($row = $result->fetch_assoc()) {
+                          echo '<tr>
+                          <td>'.$row['firstname'].'</td>
+                          <td>'.$row['lastname'].'</td>
+                          <td>'.$row['birthday'].'</td>
+                          <td>'.$row['group_list'].'</td>
+                          <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["id"].'""></td>
+                          <td class="button-td"><a href="resources/configuration/delet.php?id="'.$row["id"].'"></td>
+                          
+                          </tr>';
+                        }
+                      }
+                      else {
+                        echo "Brak Pacjentów!";
+                      }
+                      $connect->close();
+                    ?>
                     <tr>
                         <td>Tomasz</td>
                         <td>Dębosz</td>
