@@ -5,16 +5,16 @@ $user ="Tomek";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style.css">
+    <!-- Import Head -->
+    <?php require "resources/templates/head.php" ?>
     <title>Group managment</title>
 </head>
 <body>
 <div class="container">
+        <!-- Import Main Menu -->
         <?php require "resources/templates/main-menu.php" ?>
         <div class="content">
+            <!-- Import Header -->
             <?php require "resources/templates/header.php" ?>
             <div class="edit-bar">
                 <a href=""><div class="button add">+</div></a>Dodaj Grupę Użytkowników
@@ -46,7 +46,6 @@ $user ="Tomek";
                         <td class="button-td"><a href=""><div class="button add">Edit</div></a></td>
                         <td class="button-td"><a href=""><div class="button delete">Delete</div></a></td>
                     </tr>
-
                 </table>
             </div>
         </div>
