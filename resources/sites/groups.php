@@ -1,10 +1,17 @@
 <?php 
-$sql = "SELECT * FROM patients_group INNER JOIN patients
-        ON patients.id = patients_group.id_patient
-        INNER JOIN groups
-        ON groups.id = patients_group.id_group";
-
-$result = $connect->query($sql);
+$sql_1 = "SELECT * FROM patient_groups";
+/*
+$sql_2 = "SELECT
+        patients.patient_firstname,
+        patients.patient_lastname,
+        groups.group_name
+        FROM patients
+        JOIN patients_group
+        ON patients.patient_id = patients_group.patient_id
+        JOIN groups
+        ON patients_group.group_id = groups.group_id";
+*/
+$result = $connect->query($sql_1);
 $site_title = "Patient manager"
 ?>
 
@@ -22,13 +29,14 @@ $site_title = "Patient manager"
         </thead>
         <?php
         if ($result -> num_rows > 0) {
+          while($row = $result)
             // output data from table Patietns
             while($row = $result->fetch_assoc()) {
               echo '<tr>
-              <td>'.$row['name'].'</td>
-              <td>'.$row['patient_list'].'</td>
-              <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["id"].'"">+</a></td>
-              <td class="button-td"><a href="resources/configuration/delet.php?id="'.$row["id"].'">-</a></td>
+              <td>'.$row['group_id'].'</td>
+              <td>'.$row['group_name'].'</td>
+              <td class="button-td"><a href="resources/configuration/edit.php?id="">+</a></td>
+              <td class="button-td"><a href="resources/configuration/delet.php?id="">-</a></td>
               </tr>';
             }
           }

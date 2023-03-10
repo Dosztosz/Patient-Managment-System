@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Mar 2023, 14:02
+-- Czas generowania: 10 Mar 2023, 13:11
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -24,78 +24,98 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `groups`
---
-
-CREATE TABLE `groups` (
-  `id` int(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `patient_list` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Zrzut danych tabeli `groups`
---
-
-INSERT INTO `groups` (`id`, `name`, `patient_list`) VALUES
-(1, 'Leczenie Kanałowe', '1, 2, 3');
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `patients`
 --
 
 CREATE TABLE `patients` (
-  `id` int(100) NOT NULL,
-  `login` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `firstname` varchar(100) NOT NULL,
-  `lastname` varchar(100) NOT NULL,
-  `birthday` date NOT NULL,
-  `group_list` varchar(100) NOT NULL
+  `patient_id` int(100) NOT NULL,
+  `patient_login` varchar(100) NOT NULL,
+  `patient_password` varchar(100) NOT NULL,
+  `patient_firstname` varchar(100) NOT NULL,
+  `patient_lastname` varchar(100) NOT NULL,
+  `patient_birthday` date NOT NULL,
+  `patient_grouplist` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Zrzut danych tabeli `patients`
 --
 
-INSERT INTO `patients` (`id`, `login`, `password`, `firstname`, `lastname`, `birthday`, `group_list`) VALUES
+INSERT INTO `patients` (`patient_id`, `patient_login`, `patient_password`, `patient_firstname`, `patient_lastname`, `patient_birthday`, `patient_grouplist`) VALUES
 (1, 'orhideo', 'orhideo320', 'Janina', 'Tracz', '1998-03-08', '1'),
 (2, 'janek', 'janusz29', 'Janusz', 'Krawczyk', '1996-04-08', '1, 3'),
 (3, 'dawud', 'dawud420', 'Daiwd', 'Piątkowski', '1995-02-05', '1, 3');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `patients_group`
+--
+
+CREATE TABLE `patients_group` (
+  `group_id` varchar(100) NOT NULL,
+  `patient_id` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `patients_group`
+--
+
+INSERT INTO `patients_group` (`group_id`, `patient_id`) VALUES
+('1', '1'),
+('1', '2'),
+('1', '3');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `patient_groups`
+--
+
+CREATE TABLE `patient_groups` (
+  `group_id` int(100) NOT NULL,
+  `group_name` varchar(100) NOT NULL,
+  `group_patients` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `patient_groups`
+--
+
+INSERT INTO `patient_groups` (`group_id`, `group_name`, `group_patients`) VALUES
+(1, 'Leczenie Kanałowe', '1, 2, 3');
 
 --
 -- Indeksy dla zrzutów tabel
 --
 
 --
--- Indeksy dla tabeli `groups`
---
-ALTER TABLE `groups`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeksy dla tabeli `patients`
 --
 ALTER TABLE `patients`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`patient_id`);
+
+--
+-- Indeksy dla tabeli `patient_groups`
+--
+ALTER TABLE `patient_groups`
+  ADD PRIMARY KEY (`group_id`);
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
--- AUTO_INCREMENT dla tabeli `groups`
---
-ALTER TABLE `groups`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT dla tabeli `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `patient_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `patient_groups`
+--
+ALTER TABLE `patient_groups`
+  MODIFY `group_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

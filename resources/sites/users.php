@@ -23,12 +23,12 @@ $site_title = "Patient manager"
             // output data from table Patietns
             while($row = $result->fetch_assoc()) {
               echo '<tr>
-              <td>'.$row['firstname'].'</td>
-              <td>'.$row['lastname'].'</td>
-              <td>'.$row['birthday'].'</td>
-              <td>'.$row['group_list'].'</td>
-              <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["id"].'"">+</a></td>
-              <td class="button-td"><a href="resources/configuration/delet.php?id="'.$row["id"].'">-</a></td>
+              <td>'.$row['patient_firstname'].'</td>
+              <td>'.$row['patient_lastname'].'</td>
+              <td>'.$row['patient_birthday'].'</td>
+              <td>'.$row['patient_grouplist'].'</td>
+              <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["patient_id"].'"">+</a></td>
+              <td class="button-td"><a href="resources/configuration/delet.php?id="'.$row["patient_id"].'">-</a></td>
               </tr>';
             }
           }

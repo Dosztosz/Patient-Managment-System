@@ -2,7 +2,6 @@
 //Connecting to database
 require "resources/configuration/connect.php";
 $site_title= "patient managment";
-$site = $_GET['site'];
 
 if(isset($_GET['site'])){
     $site=$_GET['site'];
