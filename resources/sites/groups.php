@@ -1,5 +1,9 @@
 <?php 
-$sql = "SELECT * FROM `groups` AND 'patients'";
+$sql = "SELECT * FROM patients_group INNER JOIN patients
+        ON patients.id = patients_group.id_patient
+        INNER JOIN groups
+        ON groups.id = patients_group.id_group";
+
 $result = $connect->query($sql);
 $site_title = "Patient manager"
 ?>
@@ -23,8 +27,6 @@ $site_title = "Patient manager"
               echo '<tr>
               <td>'.$row['name'].'</td>
               <td>'.$row['patient_list'].'</td>
-              <td>'.$row['birthday'].'</td>
-              <td>'.$row['group_list'].'</td>
               <td class="button-td"><a href="resources/configuration/edit.php?id="'.$row["id"].'"">+</a></td>
               <td class="button-td"><a href="resources/configuration/delet.php?id="'.$row["id"].'">-</a></td>
               </tr>';
