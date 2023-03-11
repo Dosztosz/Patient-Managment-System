@@ -1,11 +1,25 @@
 <?php 
 $sql = "SELECT * FROM `patients`";
 $result = $connect->query($sql);
-$site_title = "Patient manager"
+$site_title = "Patient manager";
+
+
 ?>
 
 <div class="edit-bar">
-    <a href=""><div class="button add">+</div></a>Dodaj nowego pacjenta
+<form action="add_user.php" method="POST">
+                    <label for=""></label>
+                    <input type="text" placeholder="Login" name="login">
+                    <label for=""></label>
+                    <input type="password" placeholder="Password" name="password">
+                    <label for=""></label>
+                    <input type="text" placeholder="Firstname" name="firstname">
+                    <label for=""></label>
+                    <input type="text" placeholder="Lastname" name="lastname">
+                    <label for="">Birthday</label>
+                    <input type="date" name="birthday">
+                    <input type="submit" value="+">
+                </form>Dodaj nowego pacjenta
 </div>
 <h2>Patient List</h2>
 <div class="table-list">

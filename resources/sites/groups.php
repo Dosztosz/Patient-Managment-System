@@ -1,7 +1,6 @@
 <?php 
-$sql_1 = "SELECT * FROM patient_groups";
-/*
-$sql_2 = "SELECT
+$sql = "SELECT
+        groups.group_id,
         patients.patient_firstname,
         patients.patient_lastname,
         groups.group_name
@@ -10,9 +9,7 @@ $sql_2 = "SELECT
         ON patients.patient_id = patients_group.patient_id
         JOIN groups
         ON patients_group.group_id = groups.group_id";
-*/
-$result = $connect->query($sql_1);
-$site_title = "Patient manager"
+$result = $connect->query($sql);
 ?>
 
 <div class="edit-bar">
@@ -28,16 +25,18 @@ $site_title = "Patient manager"
             <td>Delete</td>
         </thead>
         <?php
+        $prev_id = null;
         if ($result -> num_rows > 0) {
-          while($row = $result)
             // output data from table Patietns
             while($row = $result->fetch_assoc()) {
-              echo '<tr>
-              <td>'.$row['group_id'].'</td>
-              <td>'.$row['group_name'].'</td>
-              <td class="button-td"><a href="resources/configuration/edit.php?id="">+</a></td>
-              <td class="button-td"><a href="resources/configuration/delet.php?id="">-</a></td>
-              </tr>';
+              if ($row["group_id"] !== $prev_id) {
+                echo '<tr>';
+                echo '<td>'.$row['group_name'].'</td>';
+                echo "<td>" . $row["patient_firstname"] . " " . $row["patient_lastname"]."<br>";
+                $prev_id = $row["group_id"];
+              } else {
+                echo $row["patient_firstname"] . " " . $row["patient_lastname"]."<br>";
+              }
             }
           }
           else {
