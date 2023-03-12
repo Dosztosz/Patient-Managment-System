@@ -1,6 +1,9 @@
 <?php 
+
+/* Import database connection */
 require "resources/configuration/connect.php";
 
+   /* Getting POST data */
     $login = $_POST['login'];
     $password = $_POST['password'];
     $firstname = $_POST['firstname'];
