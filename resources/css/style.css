@@ -2,6 +2,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Courier New', Courier, monospace;
 }
 /* a global statement */
 a{
@@ -11,7 +12,6 @@ a{
 h1{
     padding: 10px;
     font-size: 1.2rem;
-    color: white;
 }
 
 /* container grid */
@@ -38,7 +38,8 @@ header{
 
 .main-menu{
     background-color: #2d353d;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
 }
 
 .logo{
@@ -157,3 +158,11 @@ input[type=submit] {
 input[type=submit]:hover {
   background-color: #45a049;
 } 
+
+footer{
+    padding: 10px;
+    background-color: #2d353d;
+    text-align: center;
+    color: white;
+    
+}
