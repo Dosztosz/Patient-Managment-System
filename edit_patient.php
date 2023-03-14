@@ -43,13 +43,13 @@ $sql = "SELECT * FROM `patients` WHERE patient_id = $patient_id";
     <title>Group managment</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid row bg-light">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="content">
+    <div class="col-11 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
-        <div class="edit-bar">
+        <div class="d-block">
         <?php
         if ($result->num_rows > 0) {
           // output data of each row
@@ -57,13 +57,18 @@ $sql = "SELECT * FROM `patients` WHERE patient_id = $patient_id";
             echo '
             <h2>Patient '.$row['patient_firstname'].' edit</h2>
                 <form method="POST">
-                    <input type="text" value="'.$row['patient_login'].'" name="login">
-                  <input type="password" value="'.$row['patient_password'].'" name="password">
-                  <input type="text" value="'.$row['patient_firstname'].'" name="firstname">
-                  <input type="text" value="'.$row['patient_lastname'].'" name="lastname">
-                  <input type="date" value="'.$row['patient_birthday'].'" name="birthday">
-                  <input type="submit" name="submit" value="+">
-                </form>Add new Patient
+                    <label for="login">login</label>
+                    <input type="text" value="'.$row['patient_login'].'" name="login"><br>
+                    <label for="password">Password</label>
+                    <input type="password" value="'.$row['patient_password'].'" name="password"><br>
+                    <label for="firstname">Firstname</label>
+                    <input type="text" value="'.$row['patient_firstname'].'" name="firstname"><br>
+                    <label for="lastname">Lastname</label>
+                    <input type="text" value="'.$row['patient_lastname'].'" name="lastname"><br>
+                    <label for="birthday">Birthday</label>
+                    <input type="date" value="'.$row['patient_birthday'].'" name="birthday"><br>
+                    <input type="submit" name="submit" class="btn btn-primary" value="Update data">
+                </form>
             ';
           }
         } else {

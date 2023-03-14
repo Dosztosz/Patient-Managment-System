@@ -19,12 +19,23 @@ $sql = "SELECT * FROM `patients`";
     <title>Group managment</title>
 </head>
 <body>
-<div class="container">
+
+<script>
+function ShowForm(){
+    $( "#form_add" ).toggle( "show" );
+    $( "#form_show" ).toggle( "hide" );
+    $( "#form_hide" ).toggle( "show" );
+}
+
+</script>
+<div class="container-fluid row bg-light">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="content">
+    <div class="col-11 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
+
+
 
 <?php if(!empty($_GET["user"])){
     if($_GET["user"] == "added"){
@@ -37,8 +48,10 @@ $sql = "SELECT * FROM `patients`";
     } ?>
 
 
-<div class="edit-bar">
-  <form action="add_patient.php" method="POST">
+<div class="d-flex p-3 bg-white">
+    <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
+    <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new patient</button>
+    <form id="form_add" action="add_patient.php" method="POST">
       <label for=""></label>
       <input type="text" placeholder="Login" name="login">
       <label for=""></label>
@@ -49,19 +62,18 @@ $sql = "SELECT * FROM `patients`";
       <input type="text" placeholder="Lastname" name="lastname">
       <label for="">Birthday</label>
       <input type="date" name="birthday">
-      <input type="submit" value="+">
-    </form>Add new Patient
+      <input type="submit" class="btn btn-success" value="Add">
+    </form>
 </div>
 <h2>Patient List</h2>
-<div class="table-list">
-    <table>
+    <table class=" table table-responsive thead-dark table-bordered w-100 .bg-white">
         <thead>
-            <td>Name</td>
-            <td>Vorname</td>
-            <td>Birth date</td>
-            <td>User Group</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <th scope="col">Name</th>
+            <th scope="col">Vorname</th>
+            <th scope="col">Birth date</th>
+            <th scope="col">User Group</hd>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
         </thead>
         <?php
         if ($result -> num_rows > 0) {
@@ -72,8 +84,8 @@ $sql = "SELECT * FROM `patients`";
               <td>'.$row['patient_lastname'].'</td>
               <td>'.$row['patient_birthday'].'</td>
               <td>'.$row['patient_grouplist'].'</td>
-              <td class="button-td"><a href="edit_patient.php?id='.$row["patient_id"].'">Edit</a></td>
-              <td class="button-td"><a href="delete_patient.php?id='.$row['patient_id'].'">Delete</a></td>
+              <td><a class="btn btn-warning" href="edit_patient.php?id='.$row["patient_id"].'"><i class="bi bi-gear-wide"></i></a></td>
+              <td><a class="btn btn-danger" href="delete_patient.php?id='.$row['patient_id'].'"><i class="bi bi-trash"></i></a></td>
               </tr>';
             }
           }
@@ -83,8 +95,6 @@ $sql = "SELECT * FROM `patients`";
           $connect->close();
         ?>
     </table>
-</div>
-    </div>
 </div>
 <div class="footer">
     <?php include "resources/templates/footer.php" ?>
