@@ -6,7 +6,7 @@ $site_title= "patient managment";
 if(isset($_GET['site'])){
     $site=$_GET['site'];
 }
-
+//Statement for displaying Groups with patient names
 $sql = "SELECT
         groups.group_id,
         patients.patient_firstname,
@@ -39,10 +39,10 @@ function ShowForm(){
 
 
 
-<div class="container-fluid row bg-light">
+<div class="container-fluid row bg-light p-0 m-0">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="col-11 content">
+    <div class="col-11 p-0 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
 
@@ -54,7 +54,8 @@ function ShowForm(){
             <input type="submit" class="btn btn-success" value="+">
           </form>
     </div>
-    <h2>Group List</h2>
+    <h2 class="p-3"><i class="bi bi-person-bounding-box"></i>Group List</h2>
+    <!-- Table Displaying Groups -->
     <table class=" table table-responsive thead-dark table-bordered w-100 .bg-white">
         <thead>
             <th>Edit</td>
@@ -82,6 +83,7 @@ function ShowForm(){
           else {
             echo "Brak Pacjentów!";
           }
+          //Closing Connection
           $connect->close();
         ?>
     </table>

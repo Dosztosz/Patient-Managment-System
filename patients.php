@@ -28,27 +28,45 @@ function ShowForm(){
 }
 
 </script>
-<div class="container-fluid row bg-light">
+<div class="container-fluid row bg-light p-0 m-0">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="col-11 content">
+    <div class="col-11 p-0 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
 
 
+<?php //Display user added / user deleted Info
 
-<?php if(!empty($_GET["user"])){
+if(!empty($_GET["user"])){
     if($_GET["user"] == "added"){
-        require 'resources/templates/user_added.php'; 
+        $user_status_message = "Dodałeś nowego pacjenta";
+        $user_status_bg = "bg-success";
     }
     elseif($_GET["user"] == "deleted"){
-        require 'resources/templates/user_deleted.php'; 
+        $user_status_message = "Usunąłeś Pacjenta";
+        $user_status_bg = "bg-danger";
     }
+    echo '
+    <script>
+    //Script that Hides information bar
+    function Hide(){
+      $( "#toggle" ).toggle( "hide" );
+    }
+    </script>
+
+    <div id="toggle">
+      <div class="'.$user_status_bg.' d-flex p-2 justify-content-between">
+          <h2 class="text-white">'.$user_status_message.'</h2>
+          <p id="escape" onclick="Hide()">X</p>
+      </div>
+    </div>';
+
     
     } ?>
 
-
-<div class="d-flex p-3 bg-white">
+<h2 class="p-3"><i class="bi bi-person-bounding-box"></i>Patients</h2>
+<div class="mb-3 mt-3 d-flex p-3">
     <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
     <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new patient</button>
     <form id="form_add" action="add_patient.php" method="POST">
@@ -65,11 +83,10 @@ function ShowForm(){
       <input type="submit" class="btn btn-success" value="Add">
     </form>
 </div>
-<h2>Patient List</h2>
-    <table class=" table table-responsive thead-dark table-bordered w-100 .bg-white">
+    <!-- Table Displaying Patients -->
+    <table class="table table-responsive thead-dark table-bordered w-100 .bg-white">
         <thead>
-            <th scope="col">Name</th>
-            <th scope="col">Vorname</th>
+            <th scope="col">Patient Info</th>
             <th scope="col">Birth date</th>
             <th scope="col">User Group</hd>
             <th scope="col">Edit</th>
@@ -80,8 +97,7 @@ function ShowForm(){
             // output data from table Patietns
             while($row = $result->fetch_assoc()) {
               echo '<tr>
-              <td>'.$row['patient_firstname'].'</td>
-              <td>'.$row['patient_lastname'].'</td>
+              <td>'.$row['patient_firstname'].' '.$row['patient_lastname'].'</td>
               <td>'.$row['patient_birthday'].'</td>
               <td>'.$row['patient_grouplist'].'</td>
               <td><a class="btn btn-warning" href="edit_patient.php?id='.$row["patient_id"].'"><i class="bi bi-gear-wide"></i></a></td>
@@ -92,6 +108,7 @@ function ShowForm(){
           else {
             echo "Brak Pacjentów!";
           }
+          //Closing Connection
           $connect->close();
         ?>
     </table>

@@ -1,4 +1,5 @@
 <?php
+//importing config file
 require "config.php";
 
 $connect = new mysqli("$db_host","$db_user","$db_pass","$db_name");
