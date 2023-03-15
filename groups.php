@@ -1,7 +1,6 @@
 <?php 
 //Connecting to database
 require "resources/configuration/connect.php";
-$site_title= "patient managment";
 
 if(isset($_GET['site'])){
     $site=$_GET['site'];
@@ -46,9 +45,47 @@ function ShowForm(){
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
 
+        <script>
+function ShowForm(){
+    $( "#form_add" ).toggle( "show" );
+    $( "#form_show" ).toggle( "hide" );
+    $( "#form_hide" ).toggle( "show" );
+}
+
+</script>
+
+<?php //Display user added / user deleted Info
+
+if(!empty($_GET["user"])){
+    if($_GET["user"] == "added"){
+        $user_status_message = "Dodałeś nowego pacjenta";
+        $user_status_bg = "bg-success";
+    }
+    elseif($_GET["user"] == "deleted"){
+        $user_status_message = "Usunąłeś Pacjenta";
+        $user_status_bg = "bg-danger";
+    }
+    echo '
+    <script>
+    //Script that Hides information bar
+    function Hide(){
+      $( "#toggle" ).toggle( "hide" );
+    }
+    </script>
+
+    <div id="toggle">
+      <div class="'.$user_status_bg.' d-flex p-2 justify-content-between">
+          <h2 class="text-white">'.$user_status_message.'</h2>
+          <p id="escape" onclick="Hide()">X</p>
+      </div>
+    </div>';
+
+    
+    } ?>
+
           <div class="d-flex p-3 bg-white">
           <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
-          <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new patient</button>
+          <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new Group</button>
           <form id="form_add" action="add_patient.php" method="POST">
             <input type="text" placeholder="Group Name" name="name">
             <input type="submit" class="btn btn-success" value="+">

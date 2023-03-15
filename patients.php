@@ -20,14 +20,7 @@ $sql = "SELECT * FROM `patients`";
 </head>
 <body>
 
-<script>
-function ShowForm(){
-    $( "#form_add" ).toggle( "show" );
-    $( "#form_show" ).toggle( "hide" );
-    $( "#form_hide" ).toggle( "show" );
-}
 
-</script>
 <div class="container-fluid row bg-light p-0 m-0">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
@@ -35,6 +28,14 @@ function ShowForm(){
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
 
+        <script>
+function ShowForm(){
+    $( "#form_add" ).toggle( "show" );
+    $( "#form_show" ).toggle( "hide" );
+    $( "#form_hide" ).toggle( "show" );
+}
+
+</script>
 
 <?php //Display user added / user deleted Info
 
