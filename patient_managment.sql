@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 10 Mar 2023, 13:11
+-- Czas generowania: 15 Mar 2023, 22:28
 -- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.2.0
+-- Wersja PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Baza danych: `patient_managment`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `groups`
+--
+
+CREATE TABLE `groups` (
+  `group_id` int(100) NOT NULL,
+  `group_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Zrzut danych tabeli `groups`
+--
+
+INSERT INTO `groups` (`group_id`, `group_name`) VALUES
+(1, 'Leczenie Kanałowe'),
+(2, 'Przegląd');
 
 -- --------------------------------------------------------
 
@@ -42,9 +61,11 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`patient_id`, `patient_login`, `patient_password`, `patient_firstname`, `patient_lastname`, `patient_birthday`, `patient_grouplist`) VALUES
-(1, 'orhideo', 'orhideo320', 'Janina', 'Tracz', '1998-03-08', '1'),
-(2, 'janek', 'janusz29', 'Janusz', 'Krawczyk', '1996-04-08', '1, 3'),
-(3, 'dawud', 'dawud420', 'Daiwd', 'Piątkowski', '1995-02-05', '1, 3');
+(1, 'orhideo', 'orhideo320', 'Janina', 'Tracz', '1998-03-08', '1,2,3'),
+(2, 'janek', 'janusz29', 'Chuj', 'Podtołowicz', '1996-04-08', '1'),
+(3, 'dawud', 'dawud420', 'Daiwd', 'Piątkowski', '1995-02-05', '1'),
+(4, 'das', 'dasdas', 'Karolina', 'Krum', '2002-03-12', '2'),
+(5, 'das', 'dasdas', 'Karolina', 'krol', '2002-03-12', '2');
 
 -- --------------------------------------------------------
 
@@ -64,30 +85,19 @@ CREATE TABLE `patients_group` (
 INSERT INTO `patients_group` (`group_id`, `patient_id`) VALUES
 ('1', '1'),
 ('1', '2'),
-('1', '3');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `patient_groups`
---
-
-CREATE TABLE `patient_groups` (
-  `group_id` int(100) NOT NULL,
-  `group_name` varchar(100) NOT NULL,
-  `group_patients` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Zrzut danych tabeli `patient_groups`
---
-
-INSERT INTO `patient_groups` (`group_id`, `group_name`, `group_patients`) VALUES
-(1, 'Leczenie Kanałowe', '1, 2, 3');
+('1', '3'),
+('2', '4'),
+('2', '5');
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`group_id`);
 
 --
 -- Indeksy dla tabeli `patients`
@@ -96,26 +106,26 @@ ALTER TABLE `patients`
   ADD PRIMARY KEY (`patient_id`);
 
 --
--- Indeksy dla tabeli `patient_groups`
+-- Indeksy dla tabeli `patients_group`
 --
-ALTER TABLE `patient_groups`
-  ADD PRIMARY KEY (`group_id`);
+ALTER TABLE `patients_group`
+  ADD PRIMARY KEY (`group_id`,`patient_id`);
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `group_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT dla tabeli `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patient_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT dla tabeli `patient_groups`
---
-ALTER TABLE `patient_groups`
-  MODIFY `group_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `patient_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
