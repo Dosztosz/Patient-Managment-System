@@ -2,14 +2,16 @@
 
 /* Import database connection */
 require "resources/configuration/connect.php";
-   if(isset($_GET['id'])){
+   if(isset($_POST['name'])){
    /* Getting POST data */
-   $id = $_GET['id'];
+   $name = $_POST['name'];
     //SQL statement
-    $sql = "DELETE FROM `groups` WHERE `group_id` = $id";
+    $sql = "INSERT INTO `groups` (group_id, group_name)
+     VALUES (NULL, '$name')";
     //Adding informations to database
     if (mysqli_query($connect, $sql)) {
-       header('Location: groups.php?user=deleted');
+       echo "New record has been added successfully !";
+       header('Location: groups.php?user=added');
     } else {
        echo "Error: " . $sql . ":-" . mysqli_error($conn);
     }

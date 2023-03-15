@@ -55,7 +55,7 @@ $sql = "SELECT
 <div class="container-fluid row bg-light">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="col-11 content">
+    <div class="col-10 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
         <div class="edit-bar">

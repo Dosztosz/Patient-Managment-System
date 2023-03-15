@@ -10,7 +10,7 @@ function active($currect_page){
 ?>
 
 
-<div class="col-1 text-primary bg-dark min-vh-100 shadow-sm">
+<div class="col-2 text-primary bg-dark min-vh-100 shadow-sm">
     <div class="logo">
         <h1>DENT-LOGO</h1>
     </div>

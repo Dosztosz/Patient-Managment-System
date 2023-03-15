@@ -24,16 +24,21 @@ $sql = "SELECT * FROM `patients`";
 <div class="container-fluid row bg-light p-0 m-0">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
-    <div class="col-11 p-0 content">
+    <div class="col-10 p-0 content">
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
-
+        <h2 class="p-3"><i class="bi bi-person-bounding-box"></i>Patients</h2>
         <script>
 function ShowForm(){
     $( "#form_add" ).toggle( "show" );
     $( "#form_show" ).toggle( "hide" );
     $( "#form_hide" ).toggle( "show" );
+    
 }
+//Script that Hides information bar
+function Hide(){
+      $( "#toggle" ).toggle( "hide" );
+    }
 
 </script>
 
@@ -49,13 +54,6 @@ if(!empty($_GET["user"])){
         $user_status_bg = "bg-danger";
     }
     echo '
-    <script>
-    //Script that Hides information bar
-    function Hide(){
-      $( "#toggle" ).toggle( "hide" );
-    }
-    </script>
-
     <div id="toggle">
       <div class="'.$user_status_bg.' d-flex p-2 justify-content-between">
           <h2 class="text-white">'.$user_status_message.'</h2>
@@ -66,7 +64,6 @@ if(!empty($_GET["user"])){
     
     } ?>
 
-<h2 class="p-3"><i class="bi bi-person-bounding-box"></i>Patients</h2>
 <div class="mb-3 mt-3 d-flex p-3">
     <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
     <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new patient</button>
@@ -85,34 +82,36 @@ if(!empty($_GET["user"])){
     </form>
 </div>
     <!-- Table Displaying Patients -->
-    <table class="table table-responsive thead-dark table-bordered w-100 .bg-white">
-        <thead>
-            <th scope="col">Patient Info</th>
-            <th scope="col">Birth date</th>
-            <th scope="col">User Group</hd>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-        </thead>
-        <?php
-        if ($result -> num_rows > 0) {
-            // output data from table Patietns
-            while($row = $result->fetch_assoc()) {
-              echo '<tr>
-              <td>'.$row['patient_firstname'].' '.$row['patient_lastname'].'</td>
-              <td>'.$row['patient_birthday'].'</td>
-              <td>'.$row['patient_grouplist'].'</td>
-              <td><a class="btn btn-warning" href="edit_patient.php?id='.$row["patient_id"].'"><i class="bi bi-gear-wide"></i></a></td>
-              <td><a class="btn btn-danger" href="delete_patient.php?id='.$row['patient_id'].'"><i class="bi bi-trash"></i></a></td>
-              </tr>';
-            }
-          }
-          else {
-            echo "Brak Pacjentów!";
-          }
-          //Closing Connection
-          $connect->close();
-        ?>
-    </table>
+    <div class="p-3">
+        <table class="table table-responsive table-bordered w-100 bg-white">
+            <thead class="thead-dark">
+                <th scope="col">Patient Info</th>
+                <th scope="col">Birth date</th>
+                <th scope="col">User Group</hd>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </thead>
+            <?php
+            if ($result -> num_rows > 0) {
+                // output data from table Patietns
+                while($row = $result->fetch_assoc()) {
+                  echo '<tr>
+                  <td>'.$row['patient_firstname'].' '.$row['patient_lastname'].'</td>
+                  <td>'.$row['patient_birthday'].'</td>
+                  <td>'.$row['patient_grouplist'].'</td>
+                  <td><a class="btn btn-warning" href="edit_patient.php?id='.$row["patient_id"].'"><i class="bi bi-gear-wide"></i></a></td>
+                  <td><a class="btn btn-danger" href="delete_patient.php?id='.$row['patient_id'].'"><i class="bi bi-trash"></i></a></td>
+                  </tr>';
+                }
+              }
+              else {
+                echo "Brak Pacjentów!";
+              }
+              //Closing Connection
+              $connect->close();
+            ?>
+        </table>
+    </div>
 </div>
 <div class="footer">
     <?php include "resources/templates/footer.php" ?>

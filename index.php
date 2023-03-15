@@ -15,7 +15,7 @@ if(isset($_GET['site'])){
     <title>Group managment</title>
 </head>
 <body>
-<div class="container">
+<div class="container-fluid row bg-light p-0 m-0">
     <!-- Import Main Menu -->
     <?php require "resources/templates/main_menu.php" ?>
     <div class="content">
