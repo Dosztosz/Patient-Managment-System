@@ -82,6 +82,7 @@ $sql = "SELECT * FROM patients WHERE patient_id = $patient_id";
                             </div>
                             <label for="birthday">Birthday</label>
                             <input class="form-control" type="date" value="'.$row['patient_birthday'].'" name="birthday">
+                            <input class="btn btn-success" type="submit"name="submit" value="Edit Value" >
 
                         </form>';
                   }

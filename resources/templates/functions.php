@@ -1,23 +1,18 @@
 <?php
-   function deleteGroup($patient_id){
-    /* Import database connection */
-    require "resources/configuration/connect.php";
-       if(isset($_GET['id'])){
-       /* Getting POST data */
-        //SQL statement
-        $sql = "DELETE FROM patients WHERE `patients`.`patient_id` = $patient_id";
-        //Adding informations to database
-        if (mysqli_query($connect, $sql)) {
-           header('Location: patients.php?user=deleted');
-        } else {
-           echo "Error: " . $sql . ":-" . mysqli_error($conn);
-        }
-        mysqli_close($connect);
-       }
-       else{
-          echo'Brak danych do dodania pracownika';
-       }
 
+function writePatients($group_id){
+   require "resources/configuration/connect.php";
+   $sql_patients = "SELECT * FROM patients";
+   $result_patients_select = $connect->query($sql_patients);
+
+   if ($result_patients_select -> num_rows > 0){
+      while($patients = $result_patients_select->fetch_assoc()) {
+        echo  '<option value="'.$patients['patient_id'].'">'.$patients['patient_firstname'].' '.$patients['patient_lastname'].'</option>';
+      }
+    }
+    else{
+      echo '<td>None patients to choose from</td>';
+    }
 }
 
 

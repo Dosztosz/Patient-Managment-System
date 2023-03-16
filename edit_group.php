@@ -12,19 +12,14 @@ if(isset($_GET['site'])){
 if(isset($_POST['submit'])){
 
         /* Getting POST data */
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        $firstname = $_POST['firstname'];
-        $lastname = $_POST['lastname'];
-        $birthday = $_POST['birthday'];
+        $name = $_POST['name'];
          //SQL statement
-         $sql = "UPDATE `patients` 
-         SET `patient_login` = '$login', `patient_password` = '$password', `patient_firstname` = '$firstname', `patient_lastname` = '$lastname', `patient_birthday` = '$birthday'
-         WHERE `patients`.`patient_id` = $patient_id;";
+         $sql = "UPDATE `groups` 
+                  SET `group_name` = '$name'
+                  WHERE `group_id` = $group_id";
          //Adding informations to database
          if (mysqli_query($connect, $sql)) {
-            echo "New record has been added successfully !";
-            header('Location: patients.php?user=added');
+            header('Location: groups.php?user=added');
          } else {
             echo "Error: " . $sql . ":-" . mysqli_error($connect);
          }
@@ -49,18 +44,21 @@ $sql = "SELECT * FROM `groups` WHERE group_id = $group_id";
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
         <div class="edit-bar">
+          <div class="p-5 d-flex justify-content-center">
+            <div class="p-5 w-50 bg-white">
         <?php
         if ($result->num_rows > 0) {
           // output data of each row
           while($row = $result->fetch_assoc()) {
             echo '
             <h2>Editing '.$row['group_name'].' Group...</h2>
+            <hr>
                 <form method="POST">
                   <div class="form-group col-md-6">
                     <label for="login">Group Name</label>
                     <input type="text" value="'.$row['group_name'].'" name="name">
                   </div>
-                    <input type="submit" name="submit" value="+">
+                    <input class="form-control" type="submit" name="submit" value="Edit Value">
                 </form>
             ';
           }
@@ -68,6 +66,8 @@ $sql = "SELECT * FROM `groups` WHERE group_id = $group_id";
           echo "0 results";
         }
         ?>
+            </div>
+          </div>
         </div>
     </div>
 </div>

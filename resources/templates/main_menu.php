@@ -16,7 +16,6 @@ function active($currect_page){
     </div>
     <!-- Display Main Menu -->
     <nav class="nav nav-pills flex-column">
-        <a class="nav-link text-white <?php active('index.php');?>" href="index.php">Home</a>
         <a class="nav-link text-white <?php active('patients.php');?>" href="patients.php">Users</a>
         <a class="nav-link text-white <?php active('groups.php');?>" href="groups.php">Groups</a>
     </nav>

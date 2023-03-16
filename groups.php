@@ -2,9 +2,6 @@
 //Connecting to database
 require "resources/configuration/connect.php";
 
-if(isset($_GET['site'])){
-    $site=$_GET['site'];
-}
 //Statement for displaying Groups with patient names
 $sql_main = "SELECT * FROM `groups`";
 $result = $connect->query($sql_main);
@@ -18,14 +15,7 @@ $result = $connect->query($sql_main);
     <title>Group managment</title>
 </head>
 <body>
-<script>
-function ShowForm(){
-    $( "#form_add" ).toggle( "show" );
-    $( "#form_show" ).toggle( "hide" );
-    $( "#form_hide" ).toggle( "show" );
-}
 
-</script>
 
 
 
@@ -70,9 +60,9 @@ if(!empty($_GET["user"])){
           <div class="mb-3 mt-3 d-flex p-3">
           <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
           <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new Group</button>
-          <form id="form_add" action="add_group.php" method="POST">
+          <form id="form_add" action="resources/functions/add_group.php"  method="POST">
             <input type="text" placeholder="Group Name" name="name">
-            <input type="submit" class="btn btn-success" value="+">
+            <input type="submit" class="btn btn-success" value="Add">
           </form>
     </div>
     
@@ -80,10 +70,11 @@ if(!empty($_GET["user"])){
     <div class="p-3">
     <table class=" table table-responsive thead-dark table-bordered w-100 bg-white">
         <thead>
-            <th>Edit</td>
-            <th>Delete</td>
-            <th>Name</td>
-            <th>List of Patients</td>
+            <th>Group Name</td>
+            <th>Patients in group</td>
+            <th>Add patients to the group</td>
+            <th>Edit group</td>
+            <th>Delete Group</td>
         </thead>
         <?php
         $prev_id = null;
@@ -99,7 +90,8 @@ if(!empty($_GET["user"])){
                                   groups.group_id,
                                   patients.patient_firstname,
                                   patients.patient_lastname,
-                                  groups.group_name
+                                  groups.group_name,
+                                  patients_group.groups_patients_Id
                                   FROM patients
                                   JOIN patients_group
                                   ON patients.patient_id = patients_group.patient_id
@@ -110,15 +102,29 @@ if(!empty($_GET["user"])){
                 if ($result_patients -> num_rows > 0){
                   echo '<td>';
                   while($patients = $result_patients->fetch_assoc()) {
-                    echo  $patients['patient_firstname'].'<br>';
+                    echo  '<div>'.$patients['patient_firstname'].' '.$patients['patient_lastname'].' 
+                    <a href="resources/functions/delete_from_group.php?id='.$patients['groups_patients_Id'].'"><i style="color: red;" class="bi bi-trash"></i></a></div>';
                   }
                   echo '</td>';
                 }
                 else{
                   echo '<td>Brak zadeklarowanych Pacjentów</td>';
                 }
-                echo '<td><a type="button" class="btn btn-warning" href="edit_group.php?id='.$group_id.'"><i class="bi bi-gear-wide"></i></a></td>
-                <td><a type="button" class="btn btn-danger" href="delete_group.php?id='.$group_id.'"><i class="bi bi-trash"></i></a></td>';
+                echo '<td>
+                  <form method="POST" action="resources/functions/add_to_group.php">
+                    <label for="patient_id">Choose Patient:</label>
+                    <select name="patient_id">';
+
+                      writePatients($group_id);
+                    
+
+                echo '</select>
+                  <input type="hidden" name="group_id" value="'.$group_id.'" />
+                  <input type="submit" class="btn btn-success" value="Add">
+                  </form>
+                </td>
+                <td><a type="button" class="btn btn-warning" href="edit_group.php?id='.$group_id.'"><i class="bi bi-gear-wide"></i></i></a></td>
+                <td><a type="button" class="btn btn-danger" href="resources/functions/delete_group.php?id='.$group_id.'"><i class="bi bi-trash"></i></a></td>';
             }
           }
           else {

@@ -3,10 +3,6 @@
 require "resources/configuration/connect.php";
 $site_title= "patient managment";
 
-if(isset($_GET['site'])){
-    $site=$_GET['site'];
-}
-
 $sql = "SELECT * FROM `patients`";
         $result = $connect->query($sql);
         $site_title = "Patient manager";
@@ -28,19 +24,6 @@ $sql = "SELECT * FROM `patients`";
         <!-- Import Header -->
         <?php require "resources/templates/header.php" ?>
         <h2 class="p-3"><i class="bi bi-person-bounding-box"></i>Patients</h2>
-        <script>
-function ShowForm(){
-    $( "#form_add" ).toggle( "show" );
-    $( "#form_show" ).toggle( "hide" );
-    $( "#form_hide" ).toggle( "show" );
-    
-}
-//Script that Hides information bar
-function Hide(){
-      $( "#toggle" ).toggle( "hide" );
-    }
-
-</script>
 
 <?php //Display user added / user deleted Info
 
@@ -67,7 +50,7 @@ if(!empty($_GET["user"])){
 <div class="mb-3 mt-3 d-flex p-3">
     <button id="form_hide" type="button" onclick="ShowForm()" class="btn btn-warning">Hide</button>
     <button id="form_show" type="button" onclick="ShowForm()" class="btn btn-success">Add new patient</button>
-    <form id="form_add" action="add_patient.php" method="POST">
+    <form id="form_add" action="resources/functions/add_patient.php" method="POST">
       <label for=""></label>
       <input type="text" placeholder="Login" name="login">
       <label for=""></label>
@@ -87,7 +70,6 @@ if(!empty($_GET["user"])){
             <thead class="thead-dark">
                 <th scope="col">Patient Info</th>
                 <th scope="col">Birth date</th>
-                <th scope="col">User Group</hd>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </thead>
@@ -98,9 +80,8 @@ if(!empty($_GET["user"])){
                   echo '<tr>
                   <td>'.$row['patient_firstname'].' '.$row['patient_lastname'].'</td>
                   <td>'.$row['patient_birthday'].'</td>
-                  <td>'.$row['patient_grouplist'].'</td>
                   <td><a class="btn btn-warning" href="edit_patient.php?id='.$row["patient_id"].'"><i class="bi bi-gear-wide"></i></a></td>
-                  <td><a class="btn btn-danger" href="delete_patient.php?id='.$row['patient_id'].'"><i class="bi bi-trash"></i></a></td>
+                  <td><a class="btn btn-danger" href="resources/functions/delete_patient.php?id='.$row['patient_id'].'"><i class="bi bi-trash"></i></a></td>
                   </tr>';
                 }
               }
