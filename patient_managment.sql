@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Mar 2023, 22:28
+-- Czas generowania: 16 Mar 2023, 15:39
 -- Wersja serwera: 10.4.27-MariaDB
--- Wersja PHP: 8.0.25
+-- Wersja PHP: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -74,6 +74,7 @@ INSERT INTO `patients` (`patient_id`, `patient_login`, `patient_password`, `pati
 --
 
 CREATE TABLE `patients_group` (
+  `groups_patients_Id` int(100) NOT NULL,
   `group_id` varchar(100) NOT NULL,
   `patient_id` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -82,12 +83,12 @@ CREATE TABLE `patients_group` (
 -- Zrzut danych tabeli `patients_group`
 --
 
-INSERT INTO `patients_group` (`group_id`, `patient_id`) VALUES
-('1', '1'),
-('1', '2'),
-('1', '3'),
-('2', '4'),
-('2', '5');
+INSERT INTO `patients_group` (`groups_patients_Id`, `group_id`, `patient_id`) VALUES
+(1, '1', '1'),
+(2, '1', '2'),
+(3, '1', '3'),
+(4, '2', '4'),
+(5, '2', '5');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -109,7 +110,7 @@ ALTER TABLE `patients`
 -- Indeksy dla tabeli `patients_group`
 --
 ALTER TABLE `patients_group`
-  ADD PRIMARY KEY (`group_id`,`patient_id`);
+  ADD PRIMARY KEY (`groups_patients_Id`);
 
 --
 -- AUTO_INCREMENT dla zrzuconych tabel
@@ -126,6 +127,12 @@ ALTER TABLE `groups`
 --
 ALTER TABLE `patients`
   MODIFY `patient_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT dla tabeli `patients_group`
+--
+ALTER TABLE `patients_group`
+  MODIFY `groups_patients_Id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

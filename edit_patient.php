@@ -34,9 +34,7 @@ if(isset($_POST['submit'])){
 $sql = "SELECT * FROM patients WHERE patient_id = $patient_id";
         $result = $connect->query($sql);
         $site_title = "Patient manager";
-        
-$sql_groups = "SELECT * FROM groups";
-$result_groups = $connect->query($sql_groups);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,26 +81,9 @@ $result_groups = $connect->query($sql_groups);
                                 </div>
                             </div>
                             <label for="birthday">Birthday</label>
-                            <input class="form-control" type="date" value="'.$row['patient_birthday'].'" name="birthday">';
-                            echo '<p>User groups:</p>';
-                            //displays list of groups
-                            //groups that are associated with user are displayed with checkbox
-                            if ($result_groups -> num_rows > 0){
-                                while($groups = $result_groups->fetch_assoc()) {
-                                    if(str_contains($row['patient_grouplist'], $groups['group_id'])){
-                                        echo '<input class="form-check-input" type="checkbox" id="'.$groups['group_name'].'" name="'.$groups['group_id'].'" value="'.$groups['group_id'].'" checked>'.$groups['group_name'].'<br>';
-                                    }
-                                    else{
-                                        echo  '<input class="form-check-input" type="checkbox" id="'.$groups['group_name'].'" value="'.$groups['group_id'].'" name="'.$groups['group_id'].'" >'.$groups['group_name'].'<br>';
-                                    }
-                                }
-                              }
-                              else{
-                                echo '<td>Brak zadeklarowanych Pacjentów</td>';
-                              }
-                              echo '<input type="submit" name="submit" class="btn btn-primary" value="Update data">
-                        </form>
-                    ';
+                            <input class="form-control" type="date" value="'.$row['patient_birthday'].'" name="birthday">
+
+                        </form>';
                   }
                 } else {
                   echo "0 results";
