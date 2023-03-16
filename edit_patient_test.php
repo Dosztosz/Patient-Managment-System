@@ -35,7 +35,15 @@ $sql = "SELECT * FROM patients WHERE patient_id = $patient_id";
         $result = $connect->query($sql);
         $site_title = "Patient manager";
         
-$sql_groups = "SELECT * FROM groups";
+$sql_groups = "SELECT
+                groups.group_name
+                FROM patients
+                JOIN patients_group
+                ON patients.patient_id = patients_group.patient_id
+                JOIN groups
+                ON patients_group.group_id = groups.group_id
+                WHERE patients.patient_id = $patient_id";
+$patient_id = $row['patient_id'];
 $result_groups = $connect->query($sql_groups);
 ?>
 <!DOCTYPE html>
